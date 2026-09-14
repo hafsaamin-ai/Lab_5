@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  system-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run system check
+        run: python3 system_check.py
+        env:
+          APP_ENV: dev
+          APP_NAME: cloud-app
